@@ -1,4 +1,4 @@
-import org.junit.Assert;
+    import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -68,6 +68,45 @@ public class Tests {
         int[] result = exercise2.findMaxProfitability(profits);
         int[] expectedResult = new int[]{1, 2 , 10};
         Assert.assertArrayEquals(expectedResult, result);
+    }
+
+    @Test
+    public void testHugeNumbersOfInputParams(){
+        int nrOfInputs = 2000000;
+        int[] profits = new int[nrOfInputs];
+        for (int i = 0; i < nrOfInputs; i++) {
+            profits[i] = i%1000;
+        }
+        int sumFromArray = collectSum(profits, 0);
+
+        int[] expectedResult = new int[]{2, 2000000, sumFromArray};
+        int[] result = exercise2.findMaxProfitability(profits);
+        Assert.assertArrayEquals(expectedResult, result);
+
+    }
+    @Test
+    public void testHugeNumbersOfInputParamsWithNegative(){
+        int nrOfInputs = 2000000;
+        int[] profits = new int[nrOfInputs];
+        for (int i = 0; i < nrOfInputs/2; i++) {
+            profits[i] = -(i%1000);
+        }
+        for (int i = nrOfInputs/2; i < nrOfInputs; i++) {
+            profits[i] = i%1000;
+        }
+
+        int sumFromArray = collectSum(profits, nrOfInputs/2);
+        int[] expectedResult = new int[]{nrOfInputs/2 + 2 , 2000000, sumFromArray};
+        int[] result = exercise2.findMaxProfitability(profits);
+        Assert.assertArrayEquals(expectedResult, result);
+    }
+
+    private int collectSum(int[] profits, int startPoint) {
+        int sum = 0;
+        for (int i = startPoint; i < profits.length; i++) {
+            sum += profits[i];
+        }
+        return sum;
     }
 
 }
