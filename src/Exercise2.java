@@ -17,6 +17,7 @@ public class Exercise2 {
     private static void printArray(int[] result) {
         for (int i = 0; i < result.length; i++) {
             System.out.print(result[i]);
+            System.out.print(" ");
         }
         System.out.println();
     }
